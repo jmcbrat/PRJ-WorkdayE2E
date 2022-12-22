@@ -21,7 +21,7 @@ where  /*hr_empmstr.ENTITY_ID in ('ROOT','PENS','ROAD')
   and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD','PENS'))
  OR
   (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT')
+  and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD') --E2E996
   and hr_empmstr.termcode in ('DFRT','DFRC')
   )
  OR 

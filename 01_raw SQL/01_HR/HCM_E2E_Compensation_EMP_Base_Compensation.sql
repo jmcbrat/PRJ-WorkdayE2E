@@ -32,7 +32,6 @@ trim(hr_empmstr.id) as 'EmployeeID'
 ,'' as 'CompensationStep'
 ,'' as 'ProgressionStartDate'
 --C&P ,IIF(hr_emppay.re_calc='A','Salary_Plan','Hourly_Plan') as 'CompensationPlan-Base'
-,hr_emppay.re_calc
 ,CASE 
 	WHEN hr_empmstr.ID in ('E005412','E005651') THEN 'Salary_Plan'
 	WHEN hr_empmstr.ID in ('E020983','E021708','E021868','E022032') THEN 'Hourly_Plan'

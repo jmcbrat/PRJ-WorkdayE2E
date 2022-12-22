@@ -3,7 +3,7 @@
 SELECT 
 trim(hr_empmstr.id) as 'EmployeeID'
 ,IIF(trim(x.[Assumed Name]) = trim(x.[ID]), 'M-IT','C-IT') as 'SourceSystem'
-,x.ad as 'UserName'
+,IIF(left(x.ad,3) ='hq\', right(x.ad,len(x.ad)-3),x.ad) as 'UserName'
 ,'' as 'Password'
 ,'' as 'ExemptfromDelegatedAuthentication'
 ,'' as 'OpenIDConnectInternalIdentifier'

@@ -8,9 +8,23 @@ trim(hr_empmstr.id) as 'WorkerID'
 ,'Home' as 'UsageType' -- where is this???
 ,'N' as 'Public' -- where is this???
 ,trim(hr_empmstr.country) as 'CountryISOCode'
---c&p ,IIF(hr_empmstr.st_2 is null, trim(hr_empmstr.st_1),CONCAT (trim(hr_empmstr.st_1),', ',trim(hr_empmstr.st_2))) as 'AddressLine_1'
-,trim(hr_empmstr.st_1) as 'AddressLine#1'
-,trim(hr_empmstr.st_2) as 'AddressLine#2'
+-- E2E990, E2E991, E2E993 Start
+--c&p 
+, CASE 
+    WHEN hr_empmstr.st_2 is null THEN trim(hr_empmstr.st_1)
+	WHEN hr_empmstr.st_1 is null THEN trim(hr_empmstr.st_2)
+	WHEN hr_empmstr.st_1 is NOT null and hr_empmstr.st_2 is NOT null  THEN CONCAT (trim(hr_empmstr.st_1),', ',trim(hr_empmstr.st_2))
+	ELSE hr_empmstr.st_2
+	END as 'AddressLine_1'
+--,IIF(hr_empmstr.st_2 is null, trim(hr_empmstr.st_1),CONCAT (trim(hr_empmstr.st_1),', ',trim(hr_empmstr.st_2))) as 'AddressLine_1'
+--,trim(hr_empmstr.st_1) as 'AddressLine#1'
+,CASE
+   WHEN hr_empmstr.st_1 is null AND hr_empmstr.st_2 is NOT null THEN ''
+   WHEN hr_empmstr.st_1 is NOT null and hr_empmstr.st_2 is NOT null THEN ''
+   WHEN hr_empmstr.st_2 is NOT null THEN hr_empmstr.st_2 
+   --trim(hr_empmstr.st_2) 
+   END as 'AddressLine#2'
+--END E2E990, E2E991, E2E993
 ,trim(hr_empmstr.city) as 'City'
 ,IIF(hr_empmstr.id ='R001197' --Panama Res.
 	,'PAN-10'
@@ -43,6 +57,7 @@ where /*hr_empmstr.ENTITY_ID in ('ROOT','ROAD','PENS')
 	 and hr_empmstr.termcode <> 'NVST'
  )
   )
+  AND hr_empmstr.CITY is not null -- E2E990, E2E991, E2E993
 
 /*hr_empmstr.id in (
 'E003844', /* - Denise*/

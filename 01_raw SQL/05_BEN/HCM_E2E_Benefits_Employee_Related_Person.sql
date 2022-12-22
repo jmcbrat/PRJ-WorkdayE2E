@@ -1,115 +1,123 @@
-delete from [IT.Macomb_DBA].[DBO].[Empl_Related_Person];
+--HR_Benefits_Employee_Related_Person
+USE [IT.Macomb_DBA]
 GO
 
-IF OBJECT_ID(N'tempdb..#Empl_Related_Person') IS NOT NULL
-BEGIN
-DROP TABLE #Empl_Related_Person
-END
+IF (NOT EXISTS (SELECT * 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND  TABLE_NAME = 'Empl_Related_Person'))
+	BEGIN
+		create table dbo.Empl_Related_Person 
+		(
+		EmployeeID varchar(7)
+		,Sourcesystem varchar(100)
+		,DependentID varchar(100)
+		,BeneficiaryID varchar(100)
+		,EmergencyContactID varchar(100)
+		,RelatedPersonRelationship varchar(100)
+		,CountryISOCode_LegalName varchar(3)
+		,FirstName varchar(100)
+		,MiddleName varchar(100)
+		,LastName varchar(100)
+		,Prefix varchar(25)
+		,Suffix varchar(25)
+		,TrustName varchar(25)
+		,Language varchar(25)
+		,EmergencyContactPriority varchar(25)
+		,SamePhoneasEmployee varchar(25)
+		,CountryISOCode_PrimaryHome varchar(3)
+		,InternationalPhoneCode_PrimaryHome varchar(2)
+		,PhoneNumber_PrimaryHome varchar(25)
+		,PhoneExtension_PrimaryHome varchar(25)
+		,PhoneDeviceType_PrimaryHome varchar(20)
+		,CountryISOCode_AdditionalHome_1 varchar(3)
+		,InternationalPhoneCode_AdditionalHome_1 varchar(3)
+		,PhoneNumber_AdditionalHome_1 varchar(20)
+		,PhoneExtension_AdditionalHome_1 varchar(10)
+		,PhoneDeviceType_AdditionalHome_1 varchar(20)
+		,CountryISOCode_AdditionalHome_2 varchar(3)
+		,InternationalPhoneCode_AdditionalHome_2 varchar(2)
+		,PhoneNumber_AdditionalHome_2 varchar(20)
+		,PhoneExtension_AdditionalHome_2 varchar(2)
+		,PhoneDeviceType_AdditionalHome_2 varchar(20)
+		,CountryISOCode_PrimaryWork varchar(3)
+		,InternationalPhoneCode_PrimaryWork varchar(2)
+		,PhoneNumber_PrimaryWork varchar(20)
+		,PhoneExtension_PrimaryWork varchar(2)
+		,PhoneDeviceType_PrimaryWork  varchar(20)
+		,CountryISOCode_AdditionalWork_1 varchar(3)
+		,InternationalPhoneCode_AdditionalWork_1 varchar(2)
+		,PhoneNumber_AdditionalWork_1 varchar(200)
+		,PhoneExtension_AdditionalWork_1 varchar(2)
+		,PhoneDeviceType_AdditionalWork_1 varchar(20)
+		,CountryISOCode_AdditionalWork_2 varchar(3)
+		,InternationalPhoneCode_AdditionalWork_2 varchar(2)
+		,PhoneNumber_AdditionalWork_2 varchar(200)
+		,PhoneExtension_AdditionalWork_2 varchar(2)
+		,PhoneDeviceType_AdditionalWork_2 varchar(20)
+		,EmailAddress_PrimaryHome varchar(100)
+		,EmailAddress_PrimaryWork varchar(100)
+		,EmailAddress_AdditionalHome varchar(100)
+		,EmailAddress_AdditionalWork  varchar(100)
+		,SameAddressasEmployee  varchar(2)
+		,CountryISOCode_Home varchar(3)
+		,AddressLine_1_Home varchar(100)
+		,AddressLine_2_Home varchar(2)
+		,City_Home varchar(50)
+		,CitySubdivision_Home varchar(2)
+		,CitySubdivision2_Home varchar(2)
+		,Region_Home varchar(6)
+		,RegionSubdivision_Home varchar(2)
+		,RegionSubdivision2_Home varchar(2)
+		,PostalCode_Home varchar(9)
+		,CountryISOCode_AltHome_1 varchar(3)
+		,AddressLine_1_AltHome_1 varchar(2)
+		,AddressLine_2_AltHome_1 varchar(2)
+		,City_AltHome_1 varchar(2)
+		,CitySubdivision_AltHome_1 varchar(2)
+		,CitySubdivision2_AltHome_1 varchar(2)
+		,Region_AltHome_1 varchar(2)
+		,RegionSubdivision_AltHome_1 varchar(2)
+		,RegionSubdivision2_AltHome_1 varchar(2)
+		,PostalCode_AltHome_1 varchar(2)
+		,DateofBirth datetime
+		,Gender  varchar(20)
+		,NationalID  varchar(20)
+		,NationalIDType  varchar(7)
+		,EffectiveDate  datetime
+		,Reason varchar(20)
+		,UsesTobacco varchar(2)
+		,Full_timeStudent varchar(2)
+		,DependentforPayrollPurposes varchar(2)
+		,StudentStatusStartDate varchar(2)
+		,StudentStatusEndDate varchar(2)
+		,Disabled varchar(2)
+		,CouldBeCoveredForHealthCareCoverageElsewhere varchar(2)
+		,CouldBeCoveredForHealthCareCoverageElsewhereDate varchar(2)
+		,BenefitCoverageType_Medical varchar(20)
+		,StartDate_Medical varchar(20)
+		,EndDate_Medical varchar(2)
+		,BenefitCoverageType_Dental varchar(20)
+		,StartDate_Dental varchar(20)
+		,EndDate_Dental varchar(2)
+		,BenefitCoverageType_Vision varchar(20)
+		,StartDate_Vision varchar(2)
+		,EndDate_Vision varchar(2)
+		,SSN_EXT varchar(2)
+		,HR_STATUS varchar(2)
+		,ENTITY_ID varchar(4)
+		);
+		PRINT N'created table.'; 
+	END
+else
+	begin
+		delete from [IT.Macomb_DBA].dbo.Empl_Related_Person; 
+		PRINT N'deleted table data.'; 
+	END 
 GO
-
-
-create table #Empl_Related_Person 
-(
- EmployeeID varchar(7)
-,Sourcesystem varchar(100)
-,DependentID varchar(100)
-,BeneficiaryID varchar(100)
-,EmergencyContactID varchar(100)
-,RelatedPersonRelationship varchar(100)
-,CountryISOCode_LegalName varchar(3)
-,FirstName varchar(100)
-,MiddleName varchar(100)
-,LastName varchar(100)
-,Prefix varchar(25)
-,Suffix varchar(25)
-,TrustName varchar(25)
-,Language varchar(25)
-,EmergencyContactPriority varchar(25)
-,SamePhoneasEmployee varchar(25)
-,CountryISOCode_PrimaryHome varchar(3)
-,InternationalPhoneCode_PrimaryHome varchar(2)
-,PhoneNumber_PrimaryHome varchar(25)
-,PhoneExtension_PrimaryHome varchar(25)
-,PhoneDeviceType_PrimaryHome varchar(20)
-,CountryISOCode_AdditionalHome_1 varchar(3)
-,InternationalPhoneCode_AdditionalHome_1 varchar(3)
-,PhoneNumber_AdditionalHome_1 varchar(20)
-,PhoneExtension_AdditionalHome_1 varchar(10)
-,PhoneDeviceType_AdditionalHome_1 varchar(20)
-,CountryISOCode_AdditionalHome_2 varchar(3)
-,InternationalPhoneCode_AdditionalHome_2 varchar(2)
-,PhoneNumber_AdditionalHome_2 varchar(20)
-,PhoneExtension_AdditionalHome_2 varchar(2)
-,PhoneDeviceType_AdditionalHome_2 varchar(20)
-,CountryISOCode_PrimaryWork varchar(3)
-,InternationalPhoneCode_PrimaryWork varchar(2)
-,PhoneNumber_PrimaryWork varchar(20)
-,PhoneExtension_PrimaryWork varchar(2)
-,PhoneDeviceType_PrimaryWork  varchar(20)
-,CountryISOCode_AdditionalWork_1 varchar(3)
-,InternationalPhoneCode_AdditionalWork_1 varchar(2)
-,PhoneNumber_AdditionalWork_1 varchar(200)
-,PhoneExtension_AdditionalWork_1 varchar(2)
-,PhoneDeviceType_AdditionalWork_1 varchar(20)
-,CountryISOCode_AdditionalWork_2 varchar(3)
-,InternationalPhoneCode_AdditionalWork_2 varchar(2)
-,PhoneNumber_AdditionalWork_2 varchar(200)
-,PhoneExtension_AdditionalWork_2 varchar(2)
-,PhoneDeviceType_AdditionalWork_2 varchar(20)
-,EmailAddress_PrimaryHome varchar(100)
-,EmailAddress_PrimaryWork varchar(100)
-,EmailAddress_AdditionalHome varchar(100)
-,EmailAddress_AdditionalWork  varchar(100)
-,SameAddressasEmployee  varchar(2)
-,CountryISOCode_Home varchar(3)
-,AddressLine_1_Home varchar(100)
-,AddressLine_2_Home varchar(2)
-,City_Home varchar(50)
-,CitySubdivision_Home varchar(2)
-,CitySubdivision2_Home varchar(2)
-,Region_Home varchar(6)
-,RegionSubdivision_Home varchar(2)
-,RegionSubdivision2_Home varchar(2)
-,PostalCode_Home varchar(9)
-,CountryISOCode_AltHome_1 varchar(3)
-,AddressLine_1_AltHome_1 varchar(2)
-,AddressLine_2_AltHome_1 varchar(2)
-,City_AltHome_1 varchar(2)
-,CitySubdivision_AltHome_1 varchar(2)
-,CitySubdivision2_AltHome_1 varchar(2)
-,Region_AltHome_1 varchar(2)
-,RegionSubdivision_AltHome_1 varchar(2)
-,RegionSubdivision2_AltHome_1 varchar(2)
-,PostalCode_AltHome_1 varchar(2)
-,DateofBirth datetime
-,Gender  varchar(20)
-,NationalID  varchar(20)
-,NationalIDType  varchar(7)
-,EffectiveDate  datetime
-,Reason varchar(20)
-,UsesTobacco varchar(2)
-,Full_timeStudent varchar(2)
-,DependentforPayrollPurposes varchar(2)
-,StudentStatusStartDate varchar(2)
-,StudentStatusEndDate varchar(2)
-,Disabled varchar(2)
-,CouldBeCoveredForHealthCareCoverageElsewhere varchar(2)
-,CouldBeCoveredForHealthCareCoverageElsewhereDate varchar(2)
-,BenefitCoverageType_Medical varchar(20)
-,StartDate_Medical varchar(20)
-,EndDate_Medical varchar(2)
-,BenefitCoverageType_Dental varchar(20)
-,StartDate_Dental varchar(20)
-,EndDate_Dental varchar(2)
-,BenefitCoverageType_Vision varchar(20)
-,StartDate_Vision varchar(2)
-,EndDate_Vision varchar(2)
-,SSN_EXT varchar(2)
-,HR_STATUS varchar(2)
-,ENTITY_ID varchar(4)
-);
+USE production_finance
 GO
-
+--select * from @Empl_Related_Person
 
 
 
@@ -407,13 +415,13 @@ END as 'RelatedPersonRelationship'
 ,IIF(HR_family.relation='dd','Y','') as 'Disabled'
 ,'' as 'CouldBeCoveredForHealthCareCoverageElsewhere'
 ,'' as 'CouldBeCoveredForHealthCareCoverageElsewhereDate'
-,'Medical' as 'BenefitCoverageType_Medical' --koaHills: CNP568
-,'1-JAN-2022' as 'StartDate_Medical'
+,'' as 'BenefitCoverageType_Medical'	--koaHills: E2E875
+,'' as 'StartDate_Medical'				--koaHills: E2E875
 ,'' as 'EndDate_Medical'
-,'Dental' as 'BenefitCoverageType_Dental' --koaHills: CNP567
-,'1-JAN-2022' as 'StartDate_Dental'
+,'' as 'BenefitCoverageType_Dental'		--koaHills: E2E874
+,'' as 'StartDate_Dental'				--koaHills: E2E874
 ,'' as 'EndDate_Dental'
-,'Vision' as 'BenefitCoverageType_Vision' --koaHills: CNP573
+,'' as 'BenefitCoverageType_Vision'		--koaHills: E2E876
 ,'' as 'StartDate_Vision'
 ,'' as 'EndDate_Vision'
 ,hr_family.SSN_EXT as SSN_EXT
@@ -569,7 +577,7 @@ order by x.EmployeeID;
 GO
 
 
---select * from #Empl_Related_Person;
+--select * from #[IT.Macomb_DBA].[DBO].[Empl_Related_Person];
 --GO
 
 select
@@ -646,7 +654,7 @@ select
 ,[PostalCode_AltHome_1]
 ,[DateofBirth]
 ,[Gender]
-,[NationalID]
+,trim(replace([NationalID],'-','')) -- E2E863
 ,[NationalIDType]
 ,[EffectiveDate]
 ,[Reason]
@@ -668,6 +676,7 @@ select
 ,[StartDate_Vision]
 ,[EndDate_Vision]
 from [IT.Macomb_DBA].[DBO].[Empl_Related_Person]
- /*#Empl_Related_Person*/
+where NOT (NationalID in ('BENF1','BENF2', 'BENF')
+          OR NationalID = '')
 
 order by 1

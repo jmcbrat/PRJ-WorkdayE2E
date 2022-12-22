@@ -18,4 +18,5 @@ from [production_finance].[dbo].[hr_empmstr]
 where 
  hr_empmstr.hr_status = 'A'
  and hr_empmstr.ENTITY_ID in ('ROOT','ROAD')
- ORDER BY 1
+ and (hr_licncert.regid is not null and trim(hr_licncert.regid) <> '')	--koaHills:E2E998
+ ORDER BY 4

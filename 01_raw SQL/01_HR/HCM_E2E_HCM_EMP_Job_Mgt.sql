@@ -39,9 +39,6 @@ END as 'SupervisoryOrganizationID'
   FROM [production_finance].[dbo].hr_pcntble 
   WHERE substring(hr_emppay.indx_key,4,3)+left(hr_emppay.indx_key,2) = hr_pcntble.jobcode )
  as 'PositionTitle'
- ,'****remove '
- ,substring(hr_emppay.indx_key,4,3)+left(hr_emppay.indx_key,2)
- ,'****end remove'
 ,'' as 'BusinessTitle'
 ,CASE
   WHEN hr_empmstr.department = 'FAC' THEN 'LOC001'
@@ -100,7 +97,7 @@ END as 'WorkLocation'
 ,'' as 'AdditionalJobClassification#2'
 ,'' as 'AdditionalJobClassification#3'
 ,'' as 'AdditionalJobClassification#4'
-,hr_empmstr.notes
+
 from [production_finance].[dbo].[hr_empmstr]
      left join [production_finance].[dbo].[hr_emppay] 
      on hr_empmstr.id = hr_emppay.id 

@@ -4,11 +4,11 @@ SELECT
 trim(hr_empmstr.id) as 'WorkerID'
 ,'Denise Krzeminski' as 'SourceSystem'
 ,CASE
-  WHEN hr_empmstr.mrt = 'M' THEN 'Married'
-  WHEN hr_empmstr.mrt = 'D' THEN 'Divorced'
-  WHEN hr_empmstr.mrt = 'S' THEN 'Single'
-  WHEN hr_empmstr.mrt = 'W' THEN 'Widowed'
-  WHEN hr_empmstr.mrt = 'U' THEN 'Unknown'
+  WHEN hr_empmstr.mrt = 'M' THEN 'Married_United_States_of_America'
+  --WHEN hr_empmstr.mrt = 'D' THEN 'Divorced'
+  WHEN (hr_empmstr.mrt = 'S' OR hr_empmstr.mrt = 'W' OR hr_empmstr.mrt = 'D' OR hr_empmstr.mrt = 'U') THEN 'Single_United_States_of_America'
+  --WHEN hr_empmstr.mrt = 'W' THEN 'Widowed'
+  --WHEN hr_empmstr.mrt = 'U' THEN 'Unknown'
   ELSE 'Unknown'
   END as 'MaritalStatus'	-- koaHills:CNP405
 

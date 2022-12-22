@@ -2,9 +2,6 @@
 
 SELECT /*hr_cdhassgn.ENDDT,*/
 trim(hr_empmstr.id) as 'EmployeeID'
-,hr_empmstr.hr_status
-,hr_empmstr.enddt
-,hr_cdhassgn.ENDDT
 ,'Denise Krzeminski' as 'SourceSystem'
 ,'' as 'Sequence#'
 ,'Request_Compensation_Change_Conversion_Conversion' as 'CompensationChangeReason'

@@ -36,13 +36,13 @@ trim(hr_empmstr.id) as 'WorkerID'
 ,hr_empmstr.former as 'AdditionalLastName'
 ,'' as 'AdditionalSecondaryLastName'
 ,'' as 'AdditionalNameType'
-,replace(replace(trim(dbo.fn_parse_e_mail(E_Mail,'P',1)),'@@','@'),'@comcastnet','@comcast.net') as 'EmailAddress-PrimaryHome'
+,trim(dbo.fn_parse_e_mail(E_Mail,'P',1)) as 'EmailAddress-PrimaryHome'
 ,iif(dbo.fn_parse_e_mail(E_Mail,'P',1)= '','','N') as 'Public-PrimaryHome'
-,replace(replace(trim(dbo.fn_parse_e_mail(E_Mail,'W',1)),'@@','@'),'@comcastnet','@comcast.net') as 'EmailAddress-PrimaryWork'
+,trim(dbo.fn_parse_e_mail(E_Mail,'W',1)) as 'EmailAddress-PrimaryWork'
 ,iif(dbo.fn_parse_e_mail(E_Mail,'W',1)='','','Y') as 'Public-PrimaryWork'
-,replace(replace(trim(dbo.fn_parse_e_mail(E_Mail,'P',2)),'@@','@'),'@comcastnet','@comcast.net') as 'EmailAddress-AdditionalHome'
+,trim(dbo.fn_parse_e_mail(E_Mail,'P',2)) as 'EmailAddress-AdditionalHome'
 ,iif(dbo.fn_parse_e_mail(E_Mail,'P',2)='','','N') as 'Public-AdditionalHome'
-,replace(replace(trim(dbo.fn_parse_e_mail(E_Mail,'W',2)),'@@','@'),'@comcastnet','@comcast.net') as 'EmailAddress-AdditionalWork'
+,trim(dbo.fn_parse_e_mail(E_Mail,'W',2)) as 'EmailAddress-AdditionalWork'
 ,iif(dbo.fn_parse_e_mail(E_Mail,'W',2)='','','N') as 'Public-AdditionalWork'
 /*,'------ hr_empmstr -------'
 ,hr_empmstr.*
@@ -80,5 +80,5 @@ WHERE
          and hr_empmstr.ENTITY_ID = 'PENS'
          and hr_empmstr.enddt > convert(datetime,'12/31/2021')
  )*/)
- 
+ and E_Mail is not null
 ORDER BY 1
