@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="PRJ-WorkdayE2E-03-pay">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="do not publish_testing.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>do not publish_testing.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_Balances_USA_EE_Payroll_History.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_Balances_USA_EE_Payroll_History.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_Common_Pay_Election_Enrollment.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_Common_Pay_Election_Enrollment.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_Common_Pay_Group_Assignments.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_Common_Pay_Group_Assignments.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_Common_Paycheck_Delivery_Options.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_Common_Paycheck_Delivery_Options.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_Common_Payee_Input_Data.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_Common_Payee_Input_Data.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Bankruptcy_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Bankruptcy_USA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Creditor_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Creditor_USA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Deduction_Recipients.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Deduction_Recipients.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Federal_Tax_Levy_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Federal_Tax_Levy_USA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_FICA_Medicare_Exempt.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_FICA_Medicare_Exempt.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_FICA_OASDI_Exempt.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_FICA_OASDI_Exempt.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Local_Home_City_Tax_Elections.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Local_Home_City_Tax_Elections.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Local_Work_City_Tax_Elections.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Local_Work_City_Tax_Elections.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_State_Tax_Elections.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_State_Tax_Elections.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Student_Loan_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Student_Loan_USA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Support_Orders_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Support_Orders_USA.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_W_4_Elections.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_W_4_Elections.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Payroll_USA_Wage_Assignment_USA.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Payroll_USA_Wage_Assignment_USA.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>

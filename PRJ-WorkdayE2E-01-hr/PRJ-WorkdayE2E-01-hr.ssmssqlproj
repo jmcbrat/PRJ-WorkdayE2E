@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="PRJ-WorkdayE2E-01-hr">
+  <Items>
+    <LogicalFolder Name="Connections" Type="2" Sorted="true">
+      <Items />
+    </LogicalFolder>
+    <LogicalFolder Name="Queries" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="dont publish Email Match for e nnumber.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish Email Match for e nnumber.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish HR_EMP_ServiceDates.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish HR_EMP_ServiceDates.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish HR_Pay_Group_Assignments.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish HR_Pay_Group_Assignments.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish retiree-zin link.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish retiree-zin link.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish sample dates.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish sample dates.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish sccm users.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish sccm users.sql</FullPath>
+        </FileNode>
+        <FileNode Name="dont publish Sup_org cleanup after import.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>dont publish Sup_org cleanup after import.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Absence_Leave_of_Absence.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Absence_Leave_of_Absence.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Absence_Override_Balances.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Absence_Override_Balances.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Compensation_EMP_Allowance_Plans.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Compensation_EMP_Allowance_Plans.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Compensation_EMP_Base_Compensation.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Compensation_EMP_Base_Compensation.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Compensation_EMP_Calculated_Plans.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Compensation_EMP_Calculated_Plans.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Compensation_EMP_One_Time_Payments.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Compensation_EMP_One_Time_Payments.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Add_Retiree_Status.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Add_Retiree_Status.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Biographic_Data.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Biographic_Data.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Change_Vet_Status_Identificatio.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Change_Vet_Status_Identificatio.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Demographic_Data.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Demographic_Data.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_EMP_Job_Mgt.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_EMP_Job_Mgt.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_EMP_Position_Mgt.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_EMP_Position_Mgt.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_EMP_System_User_Accounts.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_EMP_System_User_Accounts.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_EMP_Terminations.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_EMP_Terminations.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Name_and_Email.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Name_and_Email.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Organization_Assignments.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Organization_Assignments.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Service_Dates.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Service_Dates.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Supervisory_Organizations.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Supervisory_Organizations.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Union_Membership.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Union_Membership.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Worker_Address.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Worker_Address.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Worker_Government_IDs.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Worker_Government_IDs.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Worker_Licenses.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Worker_Licenses.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_HCM_Worker_Phone_Numbers.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_HCM_Worker_Phone_Numbers.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Security_Assign_Role_Based_Security.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Security_Assign_Role_Based_Security.sql</FullPath>
+        </FileNode>
+        <FileNode Name="HCM_E2E_Security_Assign_User_Based_Security.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>HCM_E2E_Security_Assign_User_Based_Security.sql</FullPath>
+        </FileNode>
+        <FileNode Name="USA_Macomb_HCM_E2E_Edit_Worker_Additional_Data_EEs_Template_12062022.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>USA_Macomb_HCM_E2E_Edit_Worker_Additional_Data_EEs_Template_12062022.sql</FullPath>
+        </FileNode>
+        <FileNode Name="USA_Macomb_HCM_E2E_Legacy_Retiree_Data_EEs_Template_11162022.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>USA_Macomb_HCM_E2E_Legacy_Retiree_Data_EEs_Template_11162022.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>
