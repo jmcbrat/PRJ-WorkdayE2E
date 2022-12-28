@@ -138,7 +138,8 @@ insert into #person_Links
 /*people with depn and matching BENs*/
 select DEPN.ID
 ,DEPN.unique_id as DU_ID
-,BEN.unique_id as BU_ID
+--,BEN.unique_id as BU_ID
+,null as BU_ID
 FROM (select * from [production_finance].[dbo].hr_Family
 		where (not hr_family.enddt < '12/31/2022' or hr_family.enddt is null)
 	   and hr_family.FAMILY_TP = 'DEPN'
@@ -180,9 +181,9 @@ where left(hr_family.family_tp,3) ='BEN') AS BEN
      ON BEN.ID = DEPN.ID 
 		  AND BEN.FAMDOB = DEPN.FAMDOB)
 
-UNION ALL
+--UNION ALL
 /*People with BEN but no depn*/
-select BEN.ID
+/*select BEN.ID
 ,0 as DU_ID
 ,BEN.unique_id as BU_ID
 FROM (SELECT * from [production_finance].[dbo].hr_Family
@@ -191,10 +192,10 @@ where left(hr_family.family_tp,3) ='BEN') AS BEN
     AND NOT exists (SELECT * 
                       FROM [production_finance].[dbo].hr_Family AS DEPN 
 							 WHERE DEPN.family_tp = 'DEPN' AND BEN.ID = DEPN.ID AND ENTITY_ID = 'ROOT' ) 
-	
+*/	
 order by 1
 
-
+--select * from #person_Links where id = 'E001029'
 
 insert [IT.Macomb_DBA].[DBO].[Empl_Related_Person]
 
@@ -429,7 +430,7 @@ END as 'RelatedPersonRelationship'
 ,hr_empmstr.ENTITY_ID
 FROM [production_finance].[dbo].hr_empmstr
 left join #person_Links AS PL
-   ON hr_empmstr.id = pl.ID and (pl.DU_id is not null )
+  ON hr_empmstr.id = pl.ID and (pl.DU_id is not null )
 RIGHT JOIN [production_finance].[dbo].hr_Family
    ON hr_empmstr.ID = hr_family.id and hr_family.unique_id = pl.DU_id
 RIGHT JOIN [production_finance].[dbo].hr_Family as HFB
@@ -437,14 +438,14 @@ RIGHT JOIN [production_finance].[dbo].hr_Family as HFB
 where hr_empmstr.entity_id in ('ROOT','PENS','ZINS')
   AND hr_empmstr.hr_status = 'A'
 
-UNION ALL 
+/*UNION ALL 
 
 SELECT
 2
 ,iif(pl.Du_id =0 ,'',pl.id) as pre_depn
 ,iif(pl.bu_id is not null,HFB.id,'') as pre_ben
 ,trim(hr_empmstr.id) as 'EmployeeID'
-,'D-Jen Smiley' as 'SourceSystem'
+,'D-Jen Smiley 2' as 'SourceSystem'
 ,trim(hr_family.family_tp)
 ,CASE 
 	WHEN hr_family.relation = 'OT' THEN 'Other'
@@ -571,8 +572,8 @@ RIGHT JOIN [production_finance].[dbo].hr_Family
 RIGHT JOIN [production_finance].[dbo].hr_Family as HFB
    ON hr_empmstr.ID = HFB.id and HFB.unique_id = pl.BU_id 
 where hr_empmstr.entity_id in ('ROOT','PENS','ZINS')
-  AND hr_empmstr.hr_status = 'A' ) as X
-
+  AND hr_empmstr.hr_status = 'A'*/ ) as X
+  
 order by x.EmployeeID;
 GO
 
@@ -654,7 +655,7 @@ select
 ,[PostalCode_AltHome_1]
 ,[DateofBirth]
 ,[Gender]
-,trim(replace([NationalID],'-','')) -- E2E863
+,trim(replace([NationalID],'-',''))  as NationalID -- E2E863
 ,[NationalIDType]
 ,[EffectiveDate]
 ,[Reason]
@@ -678,5 +679,12 @@ select
 from [IT.Macomb_DBA].[DBO].[Empl_Related_Person]
 where NOT (NationalID in ('BENF1','BENF2', 'BENF')
           OR NationalID = '')
-
+and AddressLine_1_Home <> 'Not Available'
+and city_home  <> 'Not Available'
+and postalcode_home <> '99999'
+and len(nationalid ) = 9
+--and firstname is null and lastname is null
+--and gender = '' 
+--and phonenumber_primaryhome = ''
+--and dateofbirth = ''
 order by 1

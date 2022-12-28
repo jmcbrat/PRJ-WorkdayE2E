@@ -118,7 +118,7 @@ WHERE
   and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD'))
 
   )
-
+--and hr_empmstr.id = 'E008620'
 order by 1 /*hr_emppay.position*/
 
 --E005818 --v two rows 

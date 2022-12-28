@@ -4,8 +4,8 @@ SELECT
 trim(hr_empmstr.id) as 'WorkerID'
 ,'Denise Krzeminski' as 'SourceSystem'
 ,'' as 'CountryISOCode'	--koaSteven:CNP592
-,upper(replace(replace(hr_licncert.regid, ' ',''),'-','')) /*(Only include records where hr_licncert.licntype = D4)*/ as 'LicenseID'
-,IIF(hr_licncert.licntype = 'D4','Drivers License','') as 'LicenseType'
+,upper(replace(replace(hr_licncert.regid, ' ',''),'-','')) as 'LicenseID'
+,'Drivers License' as 'LicenseType'
 ,'' as 'LicenseClass'
 ,'' as 'IssuedDate'
 ,'' as 'ExpirationDate'
@@ -18,5 +18,6 @@ from [production_finance].[dbo].[hr_empmstr]
 where 
  hr_empmstr.hr_status = 'A'
  and hr_empmstr.ENTITY_ID in ('ROOT','ROAD')
- and (hr_licncert.regid is not null and trim(hr_licncert.regid) <> '')	--koaHills:E2E998
- ORDER BY 4
+ --and (hr_licncert.regid is not null and trim(hr_licncert.regid) <> '')	--koaHills:E2E998
+ and trim(hr_empmstr.id) = 'E022269'
+ ORDER BY 1

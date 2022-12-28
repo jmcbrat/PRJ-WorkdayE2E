@@ -105,23 +105,15 @@ from [production_finance].[dbo].[hr_empmstr]
 	  --left join [it.Macomb_DBA].[dbo].[EMP_Position_Mgt]
 	  --on hr_empmstr.id = EMP_Position_Mgt.emp_id 
 where 
- ((hr_empmstr.hr_status = 'A'
-  and hr_empmstr.ENTITY_ID in ('PENS'))
+ ((hr_empmstr.hr_status = 'A' and hr_empmstr.ENTITY_ID in ('PENS'))
  OR
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT','ROAD')
-  and hr_empmstr.termcode in ('DFRT','DFRC')
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT','ROAD') and hr_empmstr.termcode in ('DFRT','DFRC')
   )
  OR 
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT')
-  and hr_empmstr.enddt = '12/31/2014'
-  and hr_empmstr.department = 'MTB'
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT') and hr_empmstr.enddt = '12/31/2014' and hr_empmstr.department = 'MTB'
   )
   OR 
-  (hr_empmstr.hr_status = 'I'
-         and hr_empmstr.ENTITY_ID in ( 'ROOT', 'ROAD')
-         and hr_empmstr.enddt > convert(datetime,'12/31/2021')
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ( 'ROOT', 'ROAD','PENS') and hr_empmstr.enddt > convert(datetime,'12/31/2021')
    and hr_empmstr.termcode <> 'NVST')
 
 /*	 OR 
@@ -130,6 +122,7 @@ where
          and hr_empmstr.enddt > convert(datetime,'12/31/2021')
  )*/
   )
+
 
 
 

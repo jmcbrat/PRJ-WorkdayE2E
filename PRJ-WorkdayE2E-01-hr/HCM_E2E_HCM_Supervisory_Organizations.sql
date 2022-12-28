@@ -7,8 +7,14 @@ Supervisory_Org.emp_id as 'ManagerEmployeeID'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationID'
 ,Supervisory_Org.supervisory_org_name as 'SupervisoryOrganizationName'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationCode'
-,'N' as 'JobManagement'
-,'Y' as 'PositionManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'Y' 
+  ELSE 'N' 
+  END as 'JobManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'N' 
+  ELSE 'Y' 
+  END as 'PositionManagement'
 ,'Department' as 'SupervisoryOrgSubType'
 ,CASE
   WHEN  hr_empmstr.department = 'FAC' THEN 'LOC001'
@@ -64,8 +70,14 @@ Supervisory_Org.emp_id as 'ManagerEmployeeID'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationID'
 ,Supervisory_Org.supervisory_org_Name as 'SupervisoryOrganizationName'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationCode'
-,'N' as 'JobManagement'
-,'Y' as 'PositionManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'Y' 
+  ELSE 'N' 
+  END as 'JobManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'N' 
+  ELSE 'Y' 
+  END as 'PositionManagement'
 ,'Department' as 'SupervisoryOrgSubType'
 ,'LOC_Default' as 'Location'
 ,Supervisory_Org.superior_org_id as 'SuperiorOrganizationID'
@@ -80,16 +92,22 @@ Supervisory_Org.emp_id as 'ManagerEmployeeID'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationID'
 ,Supervisory_Org.supervisory_org_Name as 'SupervisoryOrganizationName'
 ,Supervisory_Org.supervisory_org_id as 'SupervisoryOrganizationCode'
-,'N' as 'JobManagement'
-,'Y' as 'PositionManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'Y' 
+  ELSE 'N' 
+  END as 'JobManagement'
+,case 
+  when Supervisory_Org.supervisory_org_id in ('SUP_RETIREE GENERAL','SUP_RETIREE MTB','SUP_RETIREE ROADS','SUP_RETIREE SHERIFF' ) THEN 'N' 
+  ELSE 'Y' 
+  END as 'PositionManagement'
 ,'Department' as 'SupervisoryOrgSubType'
 ,'LOC_Default' as 'Location'
 ,Supervisory_Org.superior_org_id as 'SuperiorOrganizationID'
 FROM [IT.Macomb_dba].[dbo].[Supervisory_Org]
 WHERE Supervisory_Org.emp_id is null
+--and Supervisory_Org.emp_id = 'E008620'
+
 order by 1
-
-
 
 
 /*-- had to add this one....
