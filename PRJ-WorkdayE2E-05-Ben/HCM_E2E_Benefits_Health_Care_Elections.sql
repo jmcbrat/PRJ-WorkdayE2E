@@ -8,13 +8,17 @@ Table: [IT.Macomb_DBA].dbo.Empl_Related_Person
 
 
 SELECT
+
 trim(hr_empmstr.id) as 'EmployeeID'
 ,'emp no dep-Jen Smiley' as 'SourceSystem'
 ,CASE
+  WHEN hr_empmstr.hdt < convert(datetime,'1/1/2022') 
+       and hr_beneinfo.BENE_BEG>convert(datetime,'1/1/2022') THEN  replace(convert(varchar,convert(date,hr_beneinfo.BENE_BEG),106),' ','-') -- Solves E2E893
+
   WHEN hr_empmstr.hdt < convert(datetime,'1/1/2022') THEN replace(convert(varchar,convert(date,'1/1/2022'),106),' ','-')
   WHEN hr_empmstr.hdt >=convert(datetime,'1/1/2022') THEN replace(convert(varchar,hr_empmstr.hdt,106),' ','-')
   ELSE ''
-  END as 'EventDate'
+  END as 'EventDate' -- Check hr_beneinfo.bene_beg -- see E001563
 ,'Conversion_Health_Care' as 'BenefitEventType'
 ,CASE
   WHEN hr_beneinfo.bene_plan IN ('MBHDER1E','MBHDER2E','MBHDER3E') THEN 'Medical - HDHP'
@@ -63,10 +67,14 @@ trim(hr_empmstr.id) as 'EmployeeID'
 ,''  as 'DependentID'
 
 ,replace(convert(varchar,hr_beneinfo.BENE_BEG,106),' ','-')  as 'OriginalCoverageBeginDate'
+
+,'---------------'
+,hr_beneinfo.BENE_BEG
+,hr_empmstr.HDT
 FROM [production_finance].[dbo].hr_empmstr
 	RIGHT JOIN [production_finance].[dbo].hr_beneinfo ON hr_empmstr.id = hr_beneinfo.id
 	  AND hr_beneinfo.bene_end = '12/31/2050'
-WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ROAD','ZINS')
+WHERE hr_empmstr.Entity_id in ('ROOT','ROAD', 'PENS') -- Solved E2E889 removed 'ZINS'
   AND hr_empmstr.hr_status = 'A'
   
   AND hr_beneinfo.bene_plan IN ('MBHDER1E'/*,'MBHDER2E','MBHDER3E'*/,'MBP6ER1E'/*,'MBP6ER2E','MBP6ER3E'*/,'MBCPER1R'/*,'MBCPER2R','MBCPER3R'*/,'MBNSER1R'/*,'MBNSER2R','MBNSER3R'*/,'MHP2ER1E'/*,'MHP2ER2E','MHP2ER3E'*/
@@ -86,6 +94,9 @@ SELECT
 trim(hr_empmstr.id) as 'EmployeeID'
 ,'dependent-Jen Smiley' as 'SourceSystem'
 ,CASE
+  WHEN hr_empmstr.hdt < convert(datetime,'1/1/2022') 
+       and hr_beneinfo.BENE_BEG>convert(datetime,'1/1/2022') THEN  replace(convert(varchar,convert(date,hr_beneinfo.BENE_BEG),106),' ','-') -- Solves E2E893
+
   WHEN hr_empmstr.hdt < convert(datetime,'1/1/2022') THEN replace(convert(varchar,convert(date,'1/1/2022'),106),' ','-')
   WHEN hr_empmstr.hdt >=convert(datetime,'1/1/2022') THEN replace(convert(varchar,hr_empmstr.hdt,106),' ','-')
   ELSE ''
@@ -134,6 +145,11 @@ trim(hr_empmstr.id) as 'EmployeeID'
 ,Empl_Related_Person.dependentid  as 'DependentID'
 
 ,replace(convert(varchar,HR_depdbenf.begdt,106),' ','-')  as 'OriginalCoverageBeginDate'
+
+,'---------------'
+,hr_beneinfo.BENE_BEG
+,hr_empmstr.HDT
+
 FROM [production_finance].[dbo].hr_empmstr
 	RIGHT JOIN /*#empl_related_person*/ [IT.Macomb_DBA].dbo.Empl_Related_Person
 	  ON hr_empmstr.id = Empl_Related_Person.EmployeeID
@@ -144,7 +160,7 @@ FROM [production_finance].[dbo].hr_empmstr
 	  AND  HR_depdbenf.enddt = '12/31/2050'
 	  and HR_depdbenf.benecode = left(hr_beneinfo.bene_plan,4)
 	  and HR_depdbenf.family_key = Empl_Related_Person.ssn_ext
-WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ROAD')
+WHERE hr_empmstr.Entity_id in ('ROOT','ROAD', 'PENS') -- Solves E2E889 Removes ZINS
   AND hr_empmstr.hr_status = 'A'
   
   AND hr_beneinfo.bene_plan IN (/*'MBHDER1E',*/'MBHDER2E','MBHDER3E'/*,'MBP6ER1E'*/,'MBP6ER2E','MBP6ER3E'/*,'MBCPER1R'*/,'MBCPER2R','MBCPER3R'/*,'MBNSER1R'*/,'MBNSER2R','MBNSER3R'/*,'MHP2ER1E'*/,'MHP2ER2E','MHP2ER3E'

@@ -378,17 +378,21 @@ END as 'RelatedPersonRelationship'
 ,'' as 'EmailAddress_AdditionalHome'
 ,'' as 'EmailAddress_AdditionalWork'
 ,'Y' as 'SameAddressasEmployee'
-,'USA' as 'CountryISOCode_Home'
-,ISNULL(hr_family.ST_1, 'Not Available') as 'AddressLine_1_Home'	--koaHills:CNP555
+,IIF(hr_family.ST_1 is not null,'USA','') as 'CountryISOCode_Home'
+,IIF(hr_family.ST_1 is not null,trim(hr_family.ST_1), '') as 'AddressLine_1_Home'	--koaHills:CNP555
 ,'' as 'AddressLine_2_Home'
-,CASE WHEN hr_family.CITY IS NULL OR trim(hr_family.CITY) = '' THEN 'Not Available' ELSE trim(hr_family.CITY) END  as 'City_Home' --koaHills: CNP561
+,IIF(hr_family.ST_1 is not null,trim(hr_family.CITY),'') as 'City_Home'
+/*CASE 
+  WHEN hr_family.CITY IS NULL OR trim(hr_family.CITY) = '' THEN 'Not Available' 
+  ELSE trim(hr_family.CITY) 
+  END  as 'City_Home' --koaHills: CNP561*/
 ,'' as 'CitySubdivision_Home'
 ,'' as 'CitySubdivision2_Home'
-,IIF(hr_family.STATE IS NULL,'','USA-'+hr_family.STATE) as 'Region_Home'
+,IIF(hr_family.ST_1 is not null,IIF(hr_family.STATE IS NULL,'','USA-'+hr_family.STATE),'') as 'Region_Home'
 ,'' as 'RegionSubdivision_Home'
 ,'' as 'RegionSubdivision2_Home'
 ,ISNULL(left(trim(hr_family.ZIP_CODE),5), '99999') as 'PostalCode_Home' --koaHills: CNP559
-,'USA' as 'CountryISOCode_AltHome_1'
+,'' as 'CountryISOCode_AltHome_1'
 ,'' as 'AddressLine_1_AltHome_1'
 ,'' as 'AddressLine_2_AltHome_1'
 ,'' as 'City_AltHome_1'
@@ -653,7 +657,7 @@ select
 ,[RegionSubdivision_AltHome_1]
 ,[RegionSubdivision2_AltHome_1]
 ,[PostalCode_AltHome_1]
-,[DateofBirth]
+,replace(convert(varchar, [DateofBirth], 106),' ','-')
 ,[Gender]
 ,trim(replace([NationalID],'-',''))  as NationalID -- E2E863
 ,[NationalIDType]
@@ -678,11 +682,15 @@ select
 ,[EndDate_Vision]
 from [IT.Macomb_DBA].[DBO].[Empl_Related_Person]
 where NOT (NationalID in ('BENF1','BENF2', 'BENF')
-          OR NationalID = '')
+          OR NationalID = ''
+		  OR nationalid = '000000000')
 and AddressLine_1_Home <> 'Not Available'
 and city_home  <> 'Not Available'
 and postalcode_home <> '99999'
 and len(nationalid ) = 9
+and [DateofBirth] is NOT null
+and Gender <>''
+
 --and firstname is null and lastname is null
 --and gender = '' 
 --and phonenumber_primaryhome = ''

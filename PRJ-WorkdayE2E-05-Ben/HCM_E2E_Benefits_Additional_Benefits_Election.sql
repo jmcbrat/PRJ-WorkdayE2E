@@ -1,7 +1,7 @@
 /*HCM_BENEFITS_Additional_Benefits_Election*/
 
 SELECT
-hr_empmstr.id as 'EmployeeID'
+trim(hr_empmstr.id) as 'EmployeeID'
 ,'Jen Smiley' as 'SourceSystem'
 ,IIF(hr_cdhassgn.beg < convert(date,'1/1/2022')
    ,replace(convert(date,convert(date,'1/1/2022'),106),' ','-')
@@ -20,6 +20,6 @@ hr_empmstr.id as 'EmployeeID'
 FROM [production_finance].[dbo].hr_empmstr
 	RIGHT JOIN [production_finance].[dbo].hr_cdhassgn ON hr_empmstr.id = hr_cdhassgn.id
 	  AND hr_cdhassgn.no in ('2419','2417','2418')
-WHERE hr_empmstr.Entity_id in ('ROOT','ROAD','PENS','ZINS')
+WHERE hr_empmstr.Entity_id in ('ROOT','ROAD') -- Removed PENS and ZINS  Solves E2E940
 AND hr_empmstr.hr_status = 'A'
 ORDER BY 1

@@ -19,5 +19,5 @@ where
  hr_empmstr.hr_status = 'A'
  and hr_empmstr.ENTITY_ID in ('ROOT','ROAD')
  --and (hr_licncert.regid is not null and trim(hr_licncert.regid) <> '')	--koaHills:E2E998
- and trim(hr_empmstr.id) = 'E022269'
+ --and trim(hr_empmstr.id) = 'E022269'
  ORDER BY 1

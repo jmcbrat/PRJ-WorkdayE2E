@@ -1,15 +1,15 @@
 /*HR_Override Balances*/
 select
-hr_empmstr.id as 'WorkerID'
+trim(hr_empmstr.id) as 'WorkerID'
 ,'Denise Krzeminski' as 'SourceSystem'
 ,'' as 'PositionID'
 ,CASE
   WHEN pyx_xtd_dtl.pyx_NO = '7007' and HR_empmstr.hr2 = 'Drop' THEN 'DROP_PTO_Time_Off_Plan'
   WHEN pyx_xtd_dtl.pyx_NO = '7007' and HR_empmstr.hr2 is null THEN 'PTO_Time_Off_Plan' 
   WHEN pyx_xtd_dtl.pyx_NO in ('7008','7037')  THEN 'Sick_Time_Off_Plan'
-  WHEN pyx_xtd_dtl.pyx_NO = '7010' THEN 'Personal_Business-Time_Off_Plan'
-  WHEN pyx_xtd_dtl.pyx_NO = '7014' THEN 'Compensatory-Time_Off_Plan'
-  WHEN pyx_xtd_dtl.pyx_NO = '7038' THEN 'COVID-19-Time_Off_Plan'
+  WHEN pyx_xtd_dtl.pyx_NO = '7010' THEN 'Personal_Business_Time_Off_Plan' --- need corrected value
+  WHEN pyx_xtd_dtl.pyx_NO = '7014' THEN 'Compensatory_Time_Off_Plan' --- need corrected value
+  WHEN pyx_xtd_dtl.pyx_NO = '7038' THEN 'COVID-19_Time_Off_Plan' --- need corrected value
   ELSE HR_empmstr.hr2 --convert(varchar,pyx_xtd_dtl.pyx_NO)
   END as 'TimeOffPlanID' --koaHills: CNP461
 ,'02-APR-2022' as 'OverrideBalanceDate'
@@ -68,7 +68,7 @@ where
  --and hr_empmstr.id = 'E003542'
 UNION ALL
 SELECT 
-PT_Hours_Worked_for_Absence.WORKER_ID as 'WorkerID'
+trim(PT_Hours_Worked_for_Absence.WORKER_ID) as 'WorkerID'
 ,'Denise Krzeminski' as 'SourceSystem'
 ,'' as 'PositionID'
 ,PT_Hours_Worked_for_Absence.TIME_OFF_PLAN_ID as 'TimeOffPlanID' 

@@ -31,7 +31,7 @@ trim(hr_empmstr.id) as 'EmployeeID'
 /* C&P,trim(hr_postble.LONG_DESC)  as 'R-JobPostingTitle(forthePosition)'*/
 ,CASE 
    WHEN hr_empmstr.ENTITY_ID = 'ROAD' THEN BUDGETED_TITLE
-	ELSE substring(hr_emppay.indx_key,4,3)+Left(hr_emppay.indx_key,2) 
+	ELSE emp_position_mgt.position_title --substring(hr_emppay.indx_key,4,3)+Left(hr_emppay.indx_key,2) 
 	END as 'JobPostingTitle(forthePosition)'
 ,CASE 
   WHEN hr_empmstr.ENTITY_ID = 'ROAD' THEN substring(DOR.BUDGETED_PCN,3,3) 
@@ -64,12 +64,12 @@ trim(hr_empmstr.id) as 'EmployeeID'
 ,''  as 'WorkSpace'
 
 ,CASE
- WHEN hr_empmstr.entity_id = 'ROOT' THEN  hr_emppay.[actl_hrs]*5 
+ WHEN hr_empmstr.entity_id = 'ROOT' THEN  isnull(hr_emppay.[actl_hrs],0)*5 
  WHEN hr_empmstr.entity_id = 'ROAD' THEN  40
  ELSE 0
- END as 'DefaultWeeklyHours'
+ END as 'DefaultWeeklyHours' --Solved by E2E964
 ,CASE
- WHEN hr_empmstr.entity_id = 'ROOT' THEN  hr_emppay.[actl_hrs]*5 
+ WHEN hr_empmstr.entity_id = 'ROOT' THEN  isnull(hr_emppay.[actl_hrs],0)*5 
  WHEN hr_empmstr.entity_id = 'ROAD' THEN  40
  ELSE 0
  END as 'ScheduledWeeklyHours'
@@ -94,7 +94,7 @@ trim(hr_empmstr.id) as 'EmployeeID'
   WHEN hr_emppay.re_calc='A' THEN 'Salary'
   WHEN hr_emppay.re_calc='H' THEN 'Hourly'
   WHEN hr_empmstr.Entity_id = 'PENS' THEN 'Salary'
-  ELSE hr_emppay.re_calc
+  ELSE 'Hourly'
   END as 'PayRateType'
 -- payRateType = h=hourly, A=Salary, ( not used: d =day or p =period)
 ,''  as 'CompanyInsiderType'
@@ -109,16 +109,36 @@ from [production_finance].[dbo].[hr_empmstr]
      on hr_empmstr.id = hr_emppay.id 
 	  and hr_emppay.unique_id = (select max(unique_id) from [production_finance].[dbo].[hr_emppay] where hr_empmstr.id = hr_emppay.id)
 	  left join [it.Macomb_DBA].[dbo].[EMP_Position_Mgt]
-	  on hr_empmstr.id = EMP_Position_Mgt.emp_id 
+	  on trim(hr_empmstr.id) = trim(EMP_Position_Mgt.emp_id) 
 	  left join [it.Macomb_DBA].[dbo].Department_of_Roads as DOR
-	  on hr_empmstr.id = DOR.EE_ID
-
+	  on trim(hr_empmstr.id) = trim(DOR.EE_ID)
+	  --C000329
 WHERE
  ((hr_empmstr.hr_status = 'A'
   and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD'))
-
   )
---and hr_empmstr.id = 'E008620'
-order by 1 /*hr_emppay.position*/
+ and hr_empmstr.id NOT in('E022340' ,'E022341' ,'E022342' ,'E022343' ,'E022344')
+
+order by 1 
 
 --E005818 --v two rows 
+/* dup position ids
+FO16D03001 - E004460, E020410
+JT77700025 - E020436, E022339
+JT77700061 - E020471, E022275
+CI05B00024 - E022232, E022337
+PW63C19007 - E022253, E022290
+*/
+
+/* positionID null
+C000329
+C001189
+E005012
+E008893
+E020157
+E020887
+E021427
+E021726
+E021760
+*/
+

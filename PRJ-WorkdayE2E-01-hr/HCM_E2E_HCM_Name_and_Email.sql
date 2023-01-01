@@ -12,18 +12,18 @@ trim(hr_empmstr.id) as 'WorkerID'
 ,iif(hr_empmstr.lname = 'GOVAERE-BUSQUAERT', 'GOVAERE-BUSQUAERT',trim(upper(replace(hr_empmstr.lname, ' ','')))) as 'LegalLastName'
 ,'' as 'LegalSecondaryLastName'
 ,'' /*hr_empmstr.salute*/ as 'NamePrefix'
-,'COUNTRY_PREDEFINED_PERSON_NAME_COMPONENT_'+trim(hr_empmstr.suffix) as 'NameSuffix'
+,IIF(hr_empmstr.suffix is null, '','COUNTRY_PREDEFINED_PERSON_NAME_COMPONENT_'+trim(isnull(hr_empmstr.suffix,''))) as 'NameSuffix'
 ,'' as 'FamilyNamePrefix'
 ,CASE 
-  WHEN hr_empmstr.prefname is not null THEN hr_empmstr.prefname 
+  WHEN hr_empmstr.prefname is not null THEN trim(hr_empmstr.prefname)
   ELSE ''
   END as 'PreferredFirstName'
 ,CASE 
-  WHEN hr_empmstr.prefname is not null THEN hr_empmstr.mname 
+  WHEN hr_empmstr.prefname is not null THEN trim(hr_empmstr.mname )
   ELSE ''
   END as 'PreferredMiddleName'
 ,CASE 
-  WHEN hr_empmstr.prefname is not null THEN hr_empmstr.lname 
+  WHEN hr_empmstr.prefname is not null THEN trim(hr_empmstr.lname) 
   ELSE ''
   END as 'PreferredLastName'
 ,'' as 'PreferredSecondaryLastName'
@@ -33,7 +33,7 @@ trim(hr_empmstr.id) as 'WorkerID'
 ,IIF(hr_empmstr.former is not null, trim(upper(hr_empmstr.fname)),'') as 'AdditionalFirstName'
 ,IIF(hr_empmstr.former is not null,trim(upper(replace(isnull(hr_empmstr.mname,''),'.',''))),'') as 'AdditionalMiddleName'
 --,'' as 'AdditionalLastName'
-,hr_empmstr.former as 'AdditionalLastName'
+,IIF(hr_empmstr.former is not null, trim(hr_empmstr.former),'') as 'AdditionalLastName'
 ,'' as 'AdditionalSecondaryLastName'
 ,'' as 'AdditionalNameType'
 ,trim(dbo.fn_parse_e_mail(E_Mail,'P',1)) as 'EmailAddress-PrimaryHome'
@@ -59,26 +59,16 @@ WHERE
  ((hr_empmstr.hr_status = 'A'
   and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD','PENS'))
  OR
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT','ROAD')
-  and hr_empmstr.termcode in ('DFRT','DFRC')
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT','ROAD') and hr_empmstr.termcode in ('DFRT','DFRC')
   )
  OR 
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT')
-  and hr_empmstr.enddt = '12/31/2014'
-  and hr_empmstr.department = 'MTB'
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT') and hr_empmstr.enddt = '12/31/2014' and hr_empmstr.department = 'MTB'
   )
-  -- job mgt file add ins
- OR
- (hr_empmstr.hr_status = 'I'
-         and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD')
-         and hr_empmstr.enddt > convert(datetime,'12/31/2021')
-   and hr_empmstr.termcode <> 'NVST')
- /*OR 
- (hr_empmstr.hr_status = 'I'
-         and hr_empmstr.ENTITY_ID = 'PENS'
-         and hr_empmstr.enddt > convert(datetime,'12/31/2021')
- )*/)
- and E_Mail is not null
+  OR 
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ( 'ROOT', 'ROAD','PENS') and hr_empmstr.enddt > convert(datetime,'12/31/2021')
+   and hr_empmstr.termcode <> 'NVST'
+   ))
+   and hr_empmstr.id NOT in ('R006862','R006869','R006875','R006877','R006879','R006880','R006881','R006886','R006887','R006891','R006897','R006898','R006899')
+   and hr_empmstr.id NOT in ('E022340' ,'E022341' ,'E022342' ,'E022343' ,'E022344')
+   and E_Mail is not null
 ORDER BY 1

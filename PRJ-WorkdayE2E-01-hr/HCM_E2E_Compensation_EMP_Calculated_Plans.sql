@@ -1,12 +1,12 @@
 --HR_EMP-Calculated Plans
 
 SELECT
-hr_empmstr.id as 'EmployeeID'
+trim(hr_empmstr.id) as 'EmployeeID'
 ,'Denise Krzeminski' as 'SourceSystem'
 ,ROW_NUMBER() OVER (PARTITION BY hr_empmstr.id ORDER BY hr_empmstr.id ) as 'Sequence#'
 ,'Request_Compensation_Change_Conversion_Conversion' as 'CompensationChangeReason'
 ,'' as 'PositionID'
-,hr_empmstr.longevity as 'EffectiveDate'
+,replace(convert(varchar, hr_empmstr.longevity, 106),' ','-')as 'EffectiveDate'
 ,'Longevity_Plan' as 'CalculatedPlan#1'
 ,'' as 'AmountOverride#1'
 ,'' as 'CurrencyCode-CalculatedPlan#1'

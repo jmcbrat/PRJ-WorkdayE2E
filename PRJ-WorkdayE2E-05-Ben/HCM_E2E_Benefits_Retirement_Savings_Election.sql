@@ -7,7 +7,7 @@ For now this will not be used in the query below.
 */
 
 ---------*/
-/*401k*/
+/*401a*/
 SELECT
 trim(hr_empmstr.id) as 'EmployeeID'
 ,'k-Jen Smiley' as 'SourceSystem'
@@ -16,13 +16,13 @@ trim(hr_empmstr.id) as 'EmployeeID'
   ,replace(convert(varchar,hr_empmstr.hdt,106),' ','-')) as 'EventDate'
 ,'Conversion_Retirement_Savings'  as 'BenefitEventType'
 ,CASE 
-  WHEN hr_beneinfo.bene_plan = 'DCEEEPTNA' THEN '401K'
-  WHEN hr_beneinfo.bene_plan = 'DC4EPTNA' THEN '401K'
+  WHEN hr_beneinfo.bene_plan = 'DCEEPTNA' THEN '401(a)'
+  WHEN hr_beneinfo.bene_plan in( 'DC4EPTNA','DC1EATNA') THEN '401(a)'
   ELSE ''
   END  as 'RetirementSavingsPlan'
 ,CASE 
-  WHEN hr_beneinfo.bene_plan = 'DCEEEPTNA' THEN 3
-  WHEN hr_beneinfo.bene_plan = 'DC4EPTNA' THEN 1
+  WHEN hr_beneinfo.bene_plan = 'DCEEPTNA' THEN 3
+  WHEN hr_beneinfo.bene_plan in( 'DC4EPTNA','DC1EATNA') THEN 1
   ELSE 0
   END as 'ElectionPercentage'
 ,0 as 'ElectionAmount'
@@ -31,8 +31,8 @@ trim(hr_empmstr.id) as 'EmployeeID'
 ,'' as 'ContingentPercentage-BeneficiaryAllocation'
 ,replace(convert(varchar,hr_beneinfo.bene_beg,106),' ','-') as 'OriginalCoverageBeginDate'
 FROM [production_finance].[dbo].hr_empmstr
-	RIGHT JOIN [production_finance].[dbo].hr_beneinfo ON hr_empmstr.id = hr_beneinfo.id
-	  AND hr_beneinfo.BENE_PLAN in ('DCEEEPTNA','DC4EPTNA')
+	RIGHT JOIN [production_finance].[dbo].hr_beneinfo ON trim(hr_empmstr.id) = trim(hr_beneinfo.id)
+	  AND hr_beneinfo.BENE_PLAN in ('DCEEPTNA','DC4EPTNA','DC1EATNA') -- 'DC1EATNA'
 WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ZINS')
   AND hr_empmstr.hr_status = 'A'
 

@@ -67,7 +67,7 @@ FROM [production_finance].[dbo].hr_empmstr
 
 	RIGHT JOIN [production_finance].[dbo].hr_beneinfo ON hr_empmstr.id = hr_beneinfo.id
 	  AND hr_beneinfo.bene_end = '12/31/2050'
-WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ZINS')
+WHERE hr_empmstr.Entity_id in ('ROOT','PENS') -- Solves E2E900 removed ,'ZINS'
   AND hr_empmstr.hr_status = 'A'
   
   AND hr_beneinfo.bene_plan IN ('MBHDER1E'/*,'MBHDER2E','MBHDER3E'*/,'MBP6ER1E'/*,'MBP6ER2E','MBP6ER3E'*/,'MBCPER1R'/*,'MBCPER2R','MBCPER3R'*/,'MBNSER1R'/*,'MBNSER2R','MBNSER3R'*/,'MHP2ER1E'/*,'MHP2ER2E','MHP2ER3E'*/
@@ -162,7 +162,7 @@ FROM [production_finance].[dbo].hr_empmstr
 	  AND  HR_depdbenf.enddt = '12/31/2050'
 	  and HR_depdbenf.benecode = left(hr_beneinfo.bene_plan,4)
 	  and HR_depdbenf.family_key = Empl_Related_Person.ssn_ext
-WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ZINS')
+WHERE hr_empmstr.Entity_id in ('ROOT','PENS')  -- Solves E2E900 removed ,'ZINS'
   AND hr_empmstr.hr_status = 'A'
   
   AND hr_beneinfo.bene_plan IN (/*'MBHDER1E',*/'MBHDER2E','MBHDER3E'/*,'MBP6ER1E'*/,'MBP6ER2E','MBP6ER3E'/*,'MBCPER1R'*/,'MBCPER2R','MBCPER3R'/*,'MBNSER1R'*/,'MBNSER2R','MBNSER3R'/*,'MHP2ER1E'*/,'MHP2ER2E','MHP2ER3E'
@@ -173,5 +173,5 @@ WHERE hr_empmstr.Entity_id in ('ROOT','PENS','ZINS')
 		/*,'VBCSAT1R'*/,'VBCSAT2R'/*,'VBCSAT1S'*/,'VBCSAT2S'/*,'HAUDAT1R'*/,'HAUDAT2R'
 		/*,'MBCPER1R'*/,'MBCPER2R','MBCPER3R'/*,'MBCNER1R'*/,'MBCNER2R','MBCNER3R' /*these two lines are cone needing details*/
 		/*,'MHP2ER1E'*/,'MHP2ER2E','MHP2ER3E'/*,'MHPSER1R'*/,'MHPSER2R','MHPSER3R') /*these two lines are cone needing details*/
-
+--and hr_empmstr.id = 'E003762'
 ORDER BY 1

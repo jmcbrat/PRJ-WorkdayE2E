@@ -26,24 +26,25 @@ trim(hr_empmstr.id) as 'EmployeeID'
     IIF(hr_emppay.misc_01 IS NULL,
 	    JOBCODEMAP.COMPGRADEID,
 	    hr_emppay.misc_01),*/
-	 JOBCODEMAP.COMPGRADEID  as 'CompensationGrade' 
+	 trim(JOBCODEMAP.COMPGRADEID)  as 'CompensationGrade' 
 ----,PCN - skip first 2, use next 5, skip last 3  ask Denise
 ,'' as 'CompensationGradeProfile'
 ,'' as 'CompensationStep'
 ,'' as 'ProgressionStartDate'
 --C&P ,IIF(hr_emppay.re_calc='A','Salary_Plan','Hourly_Plan') as 'CompensationPlan-Base'
 ,CASE 
-	WHEN hr_empmstr.ID in ('E005412','E005651') THEN 'Salary_Plan'
-	WHEN hr_empmstr.ID in ('E020983','E021708','E021868','E022032') THEN 'Hourly_Plan'
+	WHEN hr_empmstr.ID in ('E005412','E005651','E019348','E022103') THEN 'Salary_Plan'
+	WHEN hr_empmstr.ID in ('E020983','E021708','E021868','E022032','E021691','E022084','E004271') THEN 'Hourly_Plan'
+	WHEN hr_empmstr.entity_id = 'PENS' THEN 'Monthly_Plan'
 	WHEN hr_emppay.re_calc='A' THEN 'Salary_Plan'
 	WHEN hr_emppay.re_calc='H' THEN 'Hourly_Plan'
 	WHEN hr_emppay.re_calc='P' THEN 'Monthly_Plan'
-	WHEN hr_empmstr.entity_id = 'PENS' THEN 'Monthly_Plan'
 	ELSE ''
 END as 'CompensationPlan-Base'	--koaHills:CNP413
 --C&P ,iif(hr_emppay.re_calc='A',29000,9) as 'CompensationElementAmount-Base'
 ,CASE 
-	WHEN hr_empmstr.ID in ('E005412','E005651') THEN hr_emppay.actl_ann
+	WHEN hr_empmstr.ID in ('E005412','E005651','E019348','E022103') THEN hr_emppay.actl_ann
+	WHEN hr_empmstr.ID in ('E020983','E021708','E021868','E022032','E021691','E022084','E004271') THEN hr_emppay.actl_hrly
 	WHEN hr_emppay.re_calc='A' THEN hr_emppay.actl_ann
 	WHEN hr_emppay.re_calc='H' THEN hr_emppay.actl_hrly
 	WHEN hr_emppay.re_calc='P' THEN hr_emppay.actl_per
@@ -98,17 +99,17 @@ where
  ((hr_empmstr.hr_status = 'A'
   and hr_empmstr.ENTITY_ID in ('ROOT', 'ROAD','PENS'))
  OR
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT')
-  and hr_empmstr.termcode in ('DFRT','DFRC')
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT','ROAD') and hr_empmstr.termcode in ('DFRT','DFRC')
   )
  OR 
-  (hr_empmstr.hr_status = 'I'
-  and hr_empmstr.ENTITY_ID in ('ROOT')
-  and hr_empmstr.enddt = '12/31/2014'
-  and hr_empmstr.department = 'MTB'
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ('ROOT') and hr_empmstr.enddt = '12/31/2014' and hr_empmstr.department = 'MTB'
   )
-  )
+  OR 
+  (hr_empmstr.hr_status = 'I' and hr_empmstr.ENTITY_ID in ( 'ROOT', 'ROAD','PENS') and hr_empmstr.enddt > convert(datetime,'12/31/2021')
+   and hr_empmstr.termcode <> 'NVST'
+   ))
+   and hr_empmstr.id NOT in ('R006862','R006869','R006875','R006877','R006879','R006880','R006881','R006886','R006887','R006891','R006897','R006898','R006899')
+   and hr_empmstr.id NOT in ('E022340' ,'E022341' ,'E022342' ,'E022343' ,'E022344')
  /*and hr_empmstr.id in (
 'E003844', /* - Denise*/
 'E006056', /*- Tom*/

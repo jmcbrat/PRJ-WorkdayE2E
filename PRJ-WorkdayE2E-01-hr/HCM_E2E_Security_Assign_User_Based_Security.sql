@@ -1,7 +1,7 @@
 /*SECURITY-Assign User Based Security*/
 SELECT 
 User_Based_Security_Group as 'User-Based Security Group' /*How do i define this???*/
-,Source_System as 'SourceSystem'
+,'Arlene Zdybel' as 'SourceSystem'
 ,trim(Worker_ID) as 'Worker ID'
 
 FROM [IT.Macomb_dba].dbo.Security_Assign_User_based
